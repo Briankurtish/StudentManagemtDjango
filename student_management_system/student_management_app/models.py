@@ -11,6 +11,17 @@ class Admin(models.Model):
     objects=models.Manager()
     
 
+class Staffs(models.Model):
+    id=models.AutoField(primary_key=True)
+    name=models.CharField(max_length=255)
+    email=models.CharField(max_length=255)
+    password=models.CharField(max_length=255)
+    address=models.TextField()
+    created_at=models.DateTimeField(auto_now_add=True)
+    updated_at=models.DateTimeField(auto_now_add=True)
+
+
+
 class Courses(models.Model):
     id=models.AutoField(primary_key=True)
     course_name=models.CharField(max_length=255)
