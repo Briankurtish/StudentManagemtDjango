@@ -16,6 +16,11 @@ class Courses(models.Model):
     course_name=models.CharField(max_length=255)
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now_add=True)
+    
+class Subjects(models.Model):
+    id=models.AutoField(primary_key=True)
+    subject_name=models.CharField(max_length=255)
+    course_id=models.ForeignKey(Courses, on_delete=models.CASCADE)
 
     
 class Student(models.Model):
