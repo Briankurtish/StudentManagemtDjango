@@ -18,8 +18,10 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls.static import static
 
-from student_management_system.student_management_system import settings
+from student_management_system import settings
+from student_management_app import views
 
 urlpatterns = [
+    path('demo', views.showDemoPage),
     path('admin/', admin.site.urls),
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)+static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
