@@ -113,3 +113,7 @@ def add_student_save(request):
         except:
             messages.error(request, "Failed to Add Student")
             return HttpResponseRedirect("/add_student") 
+        
+
+def manage_staff(request):
+    return render(request, "hod_template/manage_staff.html")
