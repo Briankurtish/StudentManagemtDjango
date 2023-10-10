@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.core.files.storage import FileSystemStorage
 
 from student_management_app.models import Courses, CustomUser, Staffs, Students, Subjects
+from student_management_app.forms import AddStudentForm
 
 
 def admin_home(request):
@@ -81,46 +82,50 @@ def add_subject_save(request):
         
 
 def add_student(request):
-    courses=Courses.objects.all()
-    return render(request, "hod_template/add_student_template.html", {"courses":courses})
+    form=AddStudentForm()
+    return render(request, "hod_template/add_student_template.html", {"form":form})
 
 def add_student_save(request):
     if request.method!="POST":
         return HttpResponse("Method not Allowed")
     else:
-        first_name=request.POST.get("first_name")
-        last_name=request.POST.get("last_name")
-        username=request.POST.get("username")
-        email=request.POST.get("email")
-        password=request.POST.get("password")
-        address=request.POST.get("address")
-        session_start=request.POST.get("session_start")
-        session_end=request.POST.get("session_end")
-        course_id=request.POST.get("course")
-        gender=request.POST.get("gender")
-        
-        profile_pic=request.FILES['profile_pic']
-        fs=FileSystemStorage()
-        filename=fs.save(profile_pic.name, profile_pic)
-        profile_pic_url=fs.url(filename)
-        
-        try:
-            user=CustomUser.objects.create_user(username=username, password=password, email=email , first_name=first_name, last_name=last_name, user_type=3)
-            user.students.address=address
-            course_obj=Courses.objects.get(id=course_id)
-            user.students.course_id=course_obj
-            user.students.session_start_year=session_start
-            user.students.session_end_year=session_end
-            user.students.gender=gender
-            user.students.profile_pic=profile_pic_url
-            user.save()
-            messages.success(request, "Student Added Successfully")
-            return HttpResponseRedirect("/add_staff")
+        form=AddStudentForm(request.POST, request.FILES)
+        if form.is_valid():
+            first_name=form.cleaned_data["first_name"]
+            last_name=form.cleaned_data["last_name"]
+            username=form.cleaned_data["username"]
+            email=form.cleaned_data["email"]
+            password=form.cleaned_data["password"]
+            address=form.cleaned_data["address"]
+            session_start=form.cleaned_data["session_start"]
+            session_end=form.cleaned_data["session_end"]
+            course_id=form.cleaned_data["course"]
+            gender=form.cleaned_data["gender"]
             
-        except:
-            messages.error(request, "Failed to Add Student")
-            return HttpResponseRedirect("/add_student") 
-        
+            profile_pic=request.FILES['profile_pic']
+            fs=FileSystemStorage()
+            filename=fs.save(profile_pic.name, profile_pic)
+            profile_pic_url=fs.url(filename)
+            
+            try:
+                user=CustomUser.objects.create_user(username=username, password=password, email=email , first_name=first_name, last_name=last_name, user_type=3)
+                user.students.address=address
+                course_obj=Courses.objects.get(id=course_id)
+                user.students.course_id=course_obj
+                user.students.session_start_year=session_start
+                user.students.session_end_year=session_end
+                user.students.gender=gender
+                user.students.profile_pic=profile_pic_url
+                user.save()
+                messages.success(request, "Student Added Successfully")
+                return HttpResponseRedirect("/add_student")
+                
+            except:
+                messages.error(request, "Failed to Add Student")
+                return HttpResponseRedirect("/add_student") 
+        else:
+            form=AddStudentForm(request.POST)
+            return render(request, "hod_template/add_student_template.html", {"form":form})
 
 def manage_staff(request):
     staffs=Staffs.objects.all()
