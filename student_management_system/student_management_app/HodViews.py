@@ -200,7 +200,7 @@ def edit_student_save(request):
         course_id=request.POST.get("course")
         gender=request.POST.get("gender")
         
-        if request.FILES['profile_pic']:
+        if request.FILES.get('profile_pic', False):
             profile_pic=request.FILES['profile_pic']
             fs=FileSystemStorage()
             filename=fs.save(profile_pic.name, profile_pic)
