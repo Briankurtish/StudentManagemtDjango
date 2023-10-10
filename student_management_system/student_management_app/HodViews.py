@@ -116,4 +116,5 @@ def add_student_save(request):
         
 
 def manage_staff(request):
-    return render(request, "hod_template/manage_staff.html")
+    staffs=Staffs.objects.all()
+    return render(request, "hod_template/manage_staff.html", {"staffs":staffs})
