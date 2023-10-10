@@ -27,29 +27,17 @@
                   <thead>
                     <tr>
                       <th>ID</th>
-                      <th>First Name</th>
-                      <th>Last Name</th>
-                      <th>User Name</th>
-                      <th>Email</th>
-                      <th>Address</th>
-                      <th>Date Joined</th>
-                      <th>Last Login</th>
+                      <th>Course Name</th>
                       <th>Action</th>
 
                     </tr>
                   </thead>
                   <tbody>
-                    {% for staff in staffs %}
+                    {% for course in courses %}
                     <tr>
-                      <td>{{ staff.admin.id }}</td>
-                      <td>{{ staff.admin.first_name }}</td>
-                      <td>{{ staff.admin.last_name }}</td>
-                      <td>{{ staff.admin.username }}</td>
-                      <td>{{ staff.admin.email }}</td>
-                      <td>{{ staff.address }}</td>
-                      <td>{{ staff.admin.date_joined }}</td>
-                      <td>{{ staff.admin.last_login }}</td>
-                      <td><a href="/edit_staff/{{ staff.admin.id }}" class="btn btn-success">Edit</a></td>
+                      <td>{{ course.id }}</td>
+                      <td>{{ course.course_name }}</td>
+                      <td><a href="/edit_course/{{ course.id }}" class="btn btn-success">Edit</a></td>
                       
                     </tr>
                     {% endfor %}
