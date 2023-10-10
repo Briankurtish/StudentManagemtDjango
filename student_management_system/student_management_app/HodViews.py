@@ -132,3 +132,40 @@ def manage_course(request):
 def manage_subject(request):
     subjects=Subjects.objects.all()
     return render(request, "hod_template/manage_subject.html", {"subjects":subjects})
+
+
+def edit_staff(request, staff_id):
+    staff=Staffs.objects.get(admin=staff_id)
+    return render(request, "hod_template/edit_staff_template.html", {"staff":staff})
+
+
+def edit_staff_save(request):
+    if request.method!="POST":
+        return HttpResponse("Method not Allowed")
+    else:
+        staff_id=request.POST.get("staff_id")
+        first_name=request.POST.get("first_name")
+        last_name=request.POST.get("last_name")
+        email=request.POST.get("email")
+        username=request.POST.get("username")
+        address=request.POST.get("address")
+        
+        try:
+            user=CustomUser.objects.get(id=staff_id)
+            
+            user.first_name=first_name
+            user.last_name=last_name
+            user.email=email
+            user.username=username
+            user.save()
+            
+            staff_model=Staffs.objects.get(admin=staff_id)
+            staff_model.address=address
+            staff_model.save()
+
+            messages.success(request, "Staff Edited Successfully")
+            return HttpResponseRedirect("/edit_staff/"+staff_id)
+        
+        except:
+            messages.error(request, "Failed to Edit Staff")
+            return HttpResponseRedirect("/edit_staff/"+staff_id) 
