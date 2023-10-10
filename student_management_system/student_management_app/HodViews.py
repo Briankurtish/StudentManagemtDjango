@@ -2,7 +2,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib import messages
 from django.shortcuts import render
 
-from student_management_app.models import Courses, CustomUser, Staffs, Subjects
+from student_management_app.models import Courses, CustomUser, Staffs, Students, Subjects
 
 
 def admin_home(request):
@@ -118,3 +118,7 @@ def add_student_save(request):
 def manage_staff(request):
     staffs=Staffs.objects.all()
     return render(request, "hod_template/manage_staff.html", {"staffs":staffs})
+
+def manage_student(request):
+    students=Students.objects.all()
+    return render(request, "hod_template/manage_student.html", {"students":students})
