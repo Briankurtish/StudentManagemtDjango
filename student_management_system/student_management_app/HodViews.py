@@ -233,4 +233,37 @@ def edit_student_save(request):
         except:
             messages.error(request, "Failed to Edit Student")
             return HttpResponseRedirect("/edit_student/"+student_id) 
+
+
+
+
+def edit_subject(request, subject_id):
+    pass
+
+def edit_subject_save(request):
+    pass
+
+
+def edit_course(request, course_id):
+    course=Courses.objects.get(id=course_id)
+    return render(request, "hod_template/edit_course_template.html", {"course":course})
+
+
+def edit_course_save(request):
+    if request.method!="POST":
+        return HttpResponse("Method Not Allowed")
+    else:
+        course_id=request.POST.get("course_id")
+        course_name=request.POST.get("course")
         
+        try:
+            course=Courses.objects.get(id=course_id)
+            course.course_name=course_name
+            course.save()
+            
+            messages.success(request, "Course Edited Successfully")
+            return HttpResponseRedirect("/edit_course/"+course_id)
+        
+        except:
+            messages.error(request, "Failed to Edit Course")
+            return HttpResponseRedirect("/edit_course/"+course_id) 
