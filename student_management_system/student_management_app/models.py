@@ -8,6 +8,7 @@ class SessionYearModel(models.Model):
     id=models.AutoField(primary_key=True)
     session_start_year=models.DateField()
     session_end_year=models.DateField()
+    objects=models.Manager()
 
 class CustomUser(AbstractUser):
     user_type_data=((1,"HOD"), (2,"Staff"), (3,"Student"))
@@ -148,7 +149,7 @@ def create_user_profile(sender, instance, created, **kwargs):
         if instance.user_type==2:
             Staffs.objects.create(admin=instance)
         if instance.user_type==3:
-            Students.objects.create(admin=instance, course_id=Courses.objects.get(id=1), session_start_year="2023-01-01", session_end_year="2024-01-01", address="", profile_pic="", gender="")
+            Students.objects.create(admin=instance, course_id=Courses.objects.get(id=1), session_year_id=SessionYearModel.objects.get(id=1), address="", profile_pic="", gender="")
 
 @receiver(post_save, sender=CustomUser)
 def save_user_profile(sender, instance, created, **kwargs):

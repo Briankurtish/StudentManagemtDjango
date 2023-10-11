@@ -55,8 +55,11 @@ urlpatterns = [
     path('add_session_save', HodViews.add_session_save, name="add_session_save"),
     
     #Staff URL paths
-    
     path('staff_home', StaffViews.staff_home, name="staff_home"),
+    path('staff_take_attendance', StaffViews.staff_take_attendance, name="staff_take_attendance"),
+    
+    
+    #Student Url Paths
     path('student_home', StudentViews.student_home, name="student_home"),
     
     
