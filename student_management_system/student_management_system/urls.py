@@ -20,6 +20,8 @@ from django.conf.urls.static import static
 
 from student_management_system import settings
 from student_management_app import views, HodViews
+from student_management_app import StaffViews
+from student_management_app import StudentViews
 
 urlpatterns = [
     path('demo', views.showDemoPage),
@@ -52,5 +54,11 @@ urlpatterns = [
     
     path('edit_course/<str:course_id>', HodViews.edit_course, name="edit_course"),
     path('edit_course_save', HodViews.edit_course_save, name="edit_course_save"),
+    
+    #Staff URL paths
+    
+    path('staff_home', StaffViews.staff_home, name="staff_home"),
+    path('student_home', StudentViews.student_home, name="student_home"),
+    
     
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)+static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
