@@ -112,3 +112,10 @@ def save_updateattendance_data(request):
     
     except:
         return HttpResponse("ERR")
+    
+    
+def staff_apply_leave(request):
+    return render(request, "staff_template/staff_apply_leave.html")
+
+def staff_feedback(request):
+    pass
