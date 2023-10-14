@@ -64,6 +64,7 @@ urlpatterns = [
     path('save_attendance_data', StaffViews.save_attendance_data, name="save_attendance_data"),
     path('save_updateattendance_data', StaffViews.save_updateattendance_data, name="save_updateattendance_data"),
     path('staff_apply_leave', StaffViews.staff_apply_leave, name="staff_apply_leave"),
+    path('staff_apply_leave_save', StaffViews.staff_apply_leave_save, name="staff_apply_leave_save"),
     path('staff_feedback', StaffViews.staff_feedback, name="staff_feedback"),
     
     
