@@ -68,14 +68,32 @@ Apply For Leave and Leave Report
                     </div>
                     <!-- /.card-header -->
 
-                    <table>
-                      <tr>
-                        <th>ID</th>
-                        <th>Leave Date</th>
-                        <th>Leave Message</th>
-                        <th>Leave Status</th>
-                      </tr>
-                    </table>
+                    <div class="table">
+                      <table class="table">
+                        <tr>
+                          <th>ID</th>
+                          <th>Leave Date</th>
+                          <th>Leave Message</th>
+                          <th>Leave Status</th>
+                        </tr>
+                        {% for row in leave_data %}
+                            <tr>
+                              <td>{{ row.id }}</td>
+                              <td>{{ row.leave_date }}</td>
+                              <td>{{ row.leave_message }}</td>
+                              <td>
+                                {% if row.leave_status == 1 %}
+                                  <span class="alert alert-success">Approved</span>
+                                {% elif row.leave_status == 2 %}
+                                  <span class="alert alert-danger">Rejected</span>
+                                {% else %}
+                                  <span class="alert alert-secondary">Pending</span>
+                                {% endif %}
+                              </td>
+                            </tr>
+                        {% endfor %}
+                      </table>
+                    </div>
                   
                   </div>
       
