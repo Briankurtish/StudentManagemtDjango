@@ -26,6 +26,7 @@ def get_students(request):
     subject=Subjects.objects.get(id=subject_id)
     session_model=SessionYearModel.objects.get(id=session_year)
     students=Students.objects.filter(course_id=subject.course_id, session_year_id=session_model)
+    
     #student_data=serializers.serialize("python", students)
     list_data=[]
     
@@ -71,6 +72,7 @@ def get_attendance_dates(request):
     subject_obj=Subjects.objects.get(id=subject)
     session_year_obj=SessionYearModel.objects.get(id=session_year_id)
     attendance=Attendance.objects.filter(subject_id=subject_obj, session_year_id=session_year_obj)
+    
     attendance_obj=[]
     for attendance_single in attendance:
         data={"id":attendance_single.id, "attendance_date":str(attendance_single.attendance_date), "session_year_id":attendance_single.session_year_id.id}
