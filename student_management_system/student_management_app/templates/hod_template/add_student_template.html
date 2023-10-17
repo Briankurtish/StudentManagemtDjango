@@ -35,6 +35,7 @@
         $("#id_email").keyup(function(){
           var email = $(this).val();
 
+          if(email!=""){
           $.ajax({
             url:"{% url 'check_email_exist' %}",
             type: 'POST',
@@ -54,6 +55,39 @@
           .fail(function(){
             console.log("Failed");
           })
+        }
+        else{
+          $(".email_error").remove();
+        }
+        });
+
+        $("#id_username").keyup(function(){
+          var username = $(this).val();
+
+          if(username!=""){
+          $.ajax({
+            url:"{% url 'check_username_exist' %}",
+            type: 'POST',
+            data: {username:username}
+          })
+          .done(function(response){
+            
+            if(response=="True"){
+              $(".username_error").remove();
+              $("<span class='username_error' style='padding: 5px; color: red; font-weight: bold;'>Username Not Available</span>").insertAfter("#id_username")
+            }
+            else{
+              $(".username_error").remove();
+              $("<span class='username_error' style='padding: 5px; color: green; font-weight: bold;'>Username Available</span>").insertAfter("#id_username")
+            }
+          })
+          .fail(function(){
+            console.log("Failed");
+          })
+        }
+        else{
+          $(".username_error").remove();
+        }
         });
       });
     </script>
