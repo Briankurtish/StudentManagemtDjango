@@ -360,3 +360,10 @@ def check_username_exist(request):
         return HttpResponse(True)
     else:
         return HttpResponse(False)
+    
+    
+def student_feedback_message(request):
+    pass
+
+def staff_feedback_message(request):
+    pass
