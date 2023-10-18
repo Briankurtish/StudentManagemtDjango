@@ -141,8 +141,8 @@
             </a>
           </li>
           <li class="nav-item">
-            {% url 'add_staffs' as add_staff %}
-            <a href="{{ add_staff }}" class="nav-link {% if request.path == add_staff %} active {% endif %}">
+            {% url 'student_leave_view' as student_leave_view %}
+            <a href="{{ student_leave_view }}" class="nav-link {% if request.path == student_leave_view %} active {% endif %}">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Student Leave
