@@ -8,7 +8,13 @@ from student_management_app.models import Attendance, AttendanceReport, Courses,
 
 
 def student_home(request):
-    return render(request, "student_template/student_home_template.html")
+    student_obj=Students.objects.get(admin=request.user.id)
+    attendance_total=AttendanceReport.objects.filter(student_id=student_obj).count()
+    attendance_present=AttendanceReport.objects.filter(student_id=student_obj, status=True).count()
+    attendance_absent=AttendanceReport.objects.filter(student_id=student_obj, status=False).count()
+    course=Courses.objects.get(id=student_obj.course_id.id)
+    subjects=Subjects.objects.filter(course_id=course).count()
+    return render(request, "student_template/student_home_template.html", {"attendance_total":attendance_total, "attendance_absent":attendance_absent, "attendance_present":attendance_present, "subjects":subjects})
 
 
 def student_view_attendance(request):
