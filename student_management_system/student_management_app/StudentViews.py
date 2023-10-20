@@ -17,7 +17,9 @@ def student_home(request):
     
     subject_name=[]
     data_present=[]
+    
     data_absent=[]
+    
     subject_data=Subjects.objects.filter(course_id=student_obj.course_id)
     for subject in subject_data:
         attendance=Attendance.objects.filter(subject_id=subject.id)
