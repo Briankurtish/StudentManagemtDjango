@@ -46,9 +46,7 @@ def student_view_attendance_post(request):
     end_date=request.POST.get("end_date")
     
     start_data_parse=datetime.datetime.strptime(start_date, "%Y-%m-%d").date()
-    
-    end_data_parse=datetime.datetime.strptime(end_date, "%Y-%m-%d").date()
-    
+    end_data_parse=datetime.datetime.strptime(end_date, "%Y-%m-%d").date() 
     subject_obj=Subjects.objects.get(id=subject_id)
     user_obj=CustomUser.objects.get(id=request.user.id)
     stud_obj=Students.objects.get(admin=user_obj)
