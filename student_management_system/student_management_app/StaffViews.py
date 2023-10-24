@@ -61,7 +61,9 @@ def save_attendance_data(request):
     
 def staff_update_attendance(request):
     subjects=Subjects.objects.filter(staff_id=request.user.id)
+    
     session_year_id=SessionYearModel.objects.all()
+    
     return render(request, "staff_template/staff_update_attendance.html", {"subjects":subjects, "session_year_id":session_year_id})
 
 
@@ -120,8 +122,11 @@ def save_updateattendance_data(request):
     
 def staff_apply_leave(request):
     staff_obj=Staffs.objects.get(admin=request.user.id)
+    
     leave_data=LeaveReportStaff.objects.filter(staff_id=staff_obj)
+    
     return render(request, "staff_template/staff_apply_leave.html", {"leave_data":leave_data})
+
 
 
 def staff_apply_leave_save(request):
