@@ -78,6 +78,8 @@ class AttendanceReport(models.Model):
     attendance_id=models.ForeignKey(Attendance, on_delete=models.CASCADE)
     status=models.BooleanField(default=False)
     created_at=models.DateTimeField(auto_now_add=True)
+    
+    
     updated_at=models.DateTimeField(auto_now_add=True)
     objects=models.Manager()
     
